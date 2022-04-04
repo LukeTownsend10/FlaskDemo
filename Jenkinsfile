@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	environment {
 		VERSION = '1.0.0'
-		DOCKERHUB_CREDENTIALS = credentials('docker-root-credentials')
+		DOCKERHUB_CREDENTIALS = credentials('docker-lukewatownsend-credentials')
 	}
 	stages {
 		stage('Build') {
@@ -29,8 +29,8 @@ pipeline {
                 {
                         steps {
 				sh 'sudo chmod 666 /var/run/docker.sock'
-                                sh 'docker build -t root/flaskdemo:$VERSION .'
-                                sh 'docker build -t root/flaskdemo:latest .'
+                                sh 'docker build -t lukewatownsend/flaskdemo:$VERSION .'
+                                sh 'docker build -t lukewatownsend/flaskdemo:latest .'
                         }
                 }
 
@@ -44,8 +44,8 @@ pipeline {
 		stage('Push Image to Dockerhub') {
 
 			steps {
-				sh 'docker push root/flaskdemo:$VERSION'
-				sh 'docker push root/flaskdemo:latest'
+				sh 'docker push lukewatownsend/flaskdemo:$VERSION'
+				sh 'docker push lukewatownsend/flaskdemo:latest'
 			}
 		}
 
